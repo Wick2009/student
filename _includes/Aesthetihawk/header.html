@@ -476,6 +476,27 @@
                 margin-left: 20px;
             }
         }
+        /* Light mode (default) */
+        body.light-mode {
+            background: #ffffff;
+            color: #000000;
+        }
+
+        /* Dark mode */
+        body.dark-mode {
+            background: #121212;
+            color: #ffffff;
+        }
+
+        /* Style toggle button */
+        .theme-toggle {
+            margin-left: 20px;
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: inherit;
+        }
     </style>
 </head>
 
@@ -515,6 +536,7 @@
                     {%- endif -%}
                     {%- endfor -%}
                     <a id="loginArea" href="{{ site.baseurl }}/login">Login</a>
+                    <button id="theme-toggle" class="theme-toggle">🌙</button>
                 </div>
             </nav>
             {%- endif -%}
@@ -522,4 +544,30 @@
     </header>
 
     <script type="module" src="{{ site.baseurl }}/assets/js/api/login.js"></script>
+    <script>
+  const toggleBtn = document.getElementById("theme-toggle");
+
+  // Apply saved preference on load
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+    toggleBtn.textContent = "☀️";
+  } else {
+    document.body.classList.add("light-mode");
+    toggleBtn.textContent = "🌙";
+  }
+
+  // Toggle on click
+  toggleBtn.addEventListener("click", () => {
+    if (document.body.classList.contains("dark-mode")) {
+      document.body.classList.replace("dark-mode", "light-mode");
+      toggleBtn.textContent = "🌙";
+      localStorage.setItem("theme", "light");
+    } else {
+      document.body.classList.replace("light-mode", "dark-mode");
+      toggleBtn.textContent = "☀️";
+      localStorage.setItem("theme", "dark");
+    }
+  });
+</script>
+
 </body>
