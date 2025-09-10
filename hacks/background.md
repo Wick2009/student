@@ -98,7 +98,7 @@ permalink: background
     */
     // GameWorld manages the canvas, game objects, and the main loop
     class GameWorld {
-      static gameSpeed = 5;
+      static gameSpeed = 500;
       // images enter the world
       constructor(backgroundImg, spriteImg) {
         this.canvas = document.getElementById("world");
