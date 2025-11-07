@@ -2,7 +2,7 @@
 layout: post
 title: "AP CSP Retrospective — 2025"
 description: "Reflecting on the AP Computer Science course, MCQ review, projects, and next steps in computer science learning."
-permalink: /ap-csp-retrospective
+permalink: /apcsp/retrospective
 author: Sathwik Kintada
 toc: true
 breadcrumb: true
