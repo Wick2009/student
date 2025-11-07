@@ -17,16 +17,24 @@ At the start of the year, I was just getting comfortable with Python and basic p
 - Practiced problem-solving with arrays/lists, dictionaries, and string manipulations.  
 - Learned the importance of writing clean, readable code.  
 
-### Sprint 3: West Coast Travel / Digital Famine
-- Developed larger projects: the West Coast Travel simulation and the Digital Famine cybersecurity game.  
+### Sprint 3:  Digital Famine
 - Learned about databases, SQL, SQL injection prevention, and cryptographic hashing (SHA-256).  
 - Gained hands-on experience with interactive coding and applying concepts in real-world scenarios.  
 
 ---
 
-## N@tM Feedback
-- I received helpful comments praising my code organization and explanations in projects.  
-- Feedback helped me refine documentation, add hints in interactive quizzes, and think about the user experience.  
+## N@tM Feedback: Vault Quiz
+
+During the N@tM session, I focused on completing the Vault Quiz. Some observations from my experience:
+
+- The quiz was well-structured, with questions progressively covering the three missions: database design, SQL injection, and hashing.  
+- The retry mechanic was helpful because it allowed me to attempt a question again with a hint without penalizing my score.  
+- I noticed that shuffling the options for each question required careful reading; it reinforced understanding rather than memorization.  
+- Linking each question back to the lesson materials made it easier to review concepts when I got a question wrong.  
+- The visual progress bar and feedback system helped me track how far I was and which areas needed extra attention.  
+
+Overall, working through the Vault Quiz highlighted which areas I understand well and which topics (like hashing details or foreign key relationships) I need to revisit in lessons.
+
 
 ---
 
