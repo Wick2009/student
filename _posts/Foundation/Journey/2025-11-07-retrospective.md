@@ -7,386 +7,93 @@ permalink: /journey/retrospective
 author: Sathwik Kintada
 ---
 
-
 # AP Computer Science Retrospective
 
 ## Reflecting on Growth
-At the start of the year, I was just getting comfortable with Python and basic programming concepts. Now, after completing multiple sprints and projects, I feel much more confident in my ability to solve problems programmatically, understand debugging, and apply computer science principles in practical contexts like cybersecurity simulations and data analysis. My logical thinking and coding fluency have both improved significantly.
+When I first came into this class, I was relatively new to computer science. I knew basic Python, but I hadn’t worked on larger projects or used tools that developers actually use every day. This trimester changed that completely. I learned how to use GitHub, manage commits, push and pull changes, and collaborate with others on the same codebase — something I had never done before. At first, version control felt confusing, but once I understood branching and commits, I started to appreciate how professional and organized it made our workflow.
+
+One of the biggest areas of growth for me was teamwork. Working on a team for the **Digital Famine** project showed me how important communication, time management, and consistency are when you’re working on shared code. Instead of trying to do everything myself, I learned to trust my teammates, divide responsibilities, and review code together. It felt rewarding to see all our parts come together into a finished product.
+
+Beyond coding, I learned how to think like a problem solver. Instead of memorizing syntax, I started breaking down problems step by step — identifying what data I needed, how to process it, and how to make the code efficient and readable. That shift in thinking made coding much less intimidating and much more creative.  
+
+Looking ahead, I want to focus on **backend development** and **data analysis**. I’m especially interested in learning how databases connect with applications and how data can be used to improve real-world systems. I see myself continuing in computer science, and this class helped me realize that I want to build technology that actually helps people — not just code for the sake of it.
 
 ---
 
-## Sprint Reviews
+## Sprint 1: Tools & Setup
+Sprint 1 was all about building the foundation. I came into this class without much experience in GitHub or managing code in teams. Learning Git, cloning repositories, committing code, and resolving merge conflicts gave me a much deeper understanding of how developers work together.  
 
-### Sprint 1: Tools & Setup
-- Learned to use VS Code, GitHub, and Python/Jupyter notebooks efficiently.  
-- Understood debugging techniques and how to read error messages.  
-- Applied these tools while working on small coding exercises and foundational projects.  
+It was also the first time I used VS Code for serious development instead of small personal scripts. I learned how to structure folders, debug code efficiently, and document progress. This sprint gave me the confidence to take ownership of my own workflow and made me more independent as a coder.  
 
-### Sprint 2: Fundamentals of JavaScript/Python
-- Built confidence in core concepts like loops, conditionals, functions, and data structures.  
-- Practiced problem-solving with arrays/lists, dictionaries, and string manipulations.  
-- Learned the importance of writing clean, readable code.  
-
-### Sprint 3:  Digital Famine
-- Learned about databases, SQL, SQL injection prevention, and cryptographic hashing (SHA-256).  
-- Gained hands-on experience with interactive coding and applying concepts in real-world scenarios.  
+At the end of this sprint, I understood the importance of consistency — committing regularly, writing meaningful commit messages, and reviewing code carefully. It’s not just about writing code that works; it’s about writing code that others can understand and improve on.
 
 ---
 
-## N@tM Feedback: Vault Quiz
+## Sprint 2: Programming Fundamentals
+Sprint 2 focused on learning and practicing the fundamentals of programming — loops, conditionals, variables, and data structures. This was the point where everything started to click. I learned how logic translates into real code and how even small syntax errors can completely change outcomes.  
 
-During the N@tM session, I focused on completing the Vault Quiz. Some observations from my experience:
+The best part of this sprint was getting comfortable with both **Python** and **JavaScript**. Learning the similarities between them helped me understand that the core logic of programming is language-independent. Once I understood the logic, I could apply it anywhere.  
 
-- The quiz was well-structured, with questions progressively covering the three missions: database design, SQL injection, and hashing.  
-- The retry mechanic was helpful because it allowed me to attempt a question again with a hint without penalizing my score.  
-- I noticed that shuffling the options for each question required careful reading; it reinforced understanding rather than memorization.  
-- Linking each question back to the lesson materials made it easier to review concepts when I got a question wrong.  
-- The visual progress bar and feedback system helped me track how far I was and which areas needed extra attention.  
-
-Overall, working through the Vault Quiz highlighted which areas I understand well and which topics (like hashing details or foreign key relationships) I need to revisit in lessons.
-
+This sprint also taught me persistence. Debugging was difficult at first, but I learned to slow down, test parts of my program individually, and read error messages carefully. That process made me much more patient and analytical, which helped a lot in later sprints.
 
 ---
 
-## Next Steps on Projects
-- Extend the Digital Famine project with additional missions or alternative attack scenarios.  
-- Add analytics to track quiz performance and highlight student misconceptions in real time.  
-- Explore integrating simple AI modules for dynamic question generation or feedback.
+## Sprint 3: Digital Famine Project
+The **Digital Famine** sprint was where everything came together. It was my first time contributing to a real group project with multiple interconnected parts. Our project focused on creating an interactive learning experience that tied together topics like databases, cybersecurity, and hashing.  
+
+I took the lead on the **frontend development**, focusing on user experience and interface design. I made sure the layout was clean, the buttons were intuitive, and the overall flow felt engaging. Through this process, I learned how much design impacts usability — how a small alignment or color change can completely change how a user feels when using the program.  
+
+I also gained a new appreciation for collaboration. It’s not just about splitting the work — it’s about making sure everyone’s pieces fit together smoothly. I had to learn how to merge code carefully, avoid overwriting others’ work, and stay in sync with my teammates through GitHub commits.  
+
+If I had more time, I would focus more on the **backend** side of things. I want to understand how to connect a database, manage user inputs securely, and process data behind the scenes. That’s something I plan to focus on in the next trimester — learning how to build more complete, data-driven applications.
 
 ---
 
-## Next Learning Goals in Computer Science
-- Learn object-oriented programming in Python and Java.  
-- Understand algorithms and data structures in depth.  
-- Start exploring AI/ML applications for real-world problems  
+## N@tM Reflection: The Vault Quiz
+During **N@tM**, I presented the **Vault Quiz**, which was a fun and challenging way for users to test their understanding of cybersecurity and database concepts. Seeing people interact with it was really exciting. They liked the randomization of questions and the hints that helped them learn as they played.
+
+What stood out to me was how *teaching* others made me understand the material better myself. I realized that the quiz wasn’t just a project — it was a tool that helped others learn through interaction, not memorization. I also saw how important user feedback is. People mentioned they liked the difficulty progression, and that helped me understand how to balance challenge and accessibility in future projects.
+
+If I could improve the project, I would add a backend system to store scores and track question difficulty. It would make the quiz adaptive and data-driven — something I definitely want to explore next trimester.
 
 ---
 
-## Analytics Review
+## MCQ Reflection: Learning from Mistakes and Building a Study Plan
+Instead of focusing on my score, I want to focus on *how I can improve*. When I reviewed the AP CSP multiple-choice section, I realized that most of my mistakes came from **conceptual understanding**, not from carelessness. The main areas I struggled with were algorithm efficiency, logic gates, abstraction, and some networking topics.  
 
+To recover and prepare better, here’s what I plan to do:
 
----
+1. **Focus on Algorithm Tracing and Big-O Reasoning**  
+   - I sometimes mixed up what “linear” and “logarithmic” runtimes actually mean. To fix this, I’m going to practice tracing algorithms line by line and timing how input size affects performance.  
+   - I’ll also review examples of O(n), O(log n), and O(n²) in both Python and pseudocode, so I can visualize what runtime growth really looks like.
 
-# AP CSP MCQ Corrections
+2. **Strengthen Logic and Boolean Reasoning**  
+   - Some mistakes came from logic gate questions (like NAND vs. AND). I plan to build a truth table for each gate type and practice combining them in short code snippets.  
+   - I’ll also use small logic puzzles online to get more comfortable analyzing conditions and compound statements.
 
-This section reviews all the questions I got wrong on the AP Computer Science Principles multiple-choice section. Each question includes the full text, all answer options, my selected answer, and reasoning.
+3. **Review Abstraction and Data Representation**  
+   - I realized I often memorized definitions but didn’t fully understand how abstraction works in real examples. To improve, I’ll go back to our class lessons and try to explain each concept in my own words — for example, how a function simplifies complexity or how digital images represent color using bits.
 
----
+4. **Study Networking and Cryptography Concepts**  
+   - Questions about protocols, open standards, and encryption tripped me up because I only understood them at a surface level.  
+   - I’ll review how TCP/IP, DNS, and HTTP work together, and I’ll study the differences between symmetric and asymmetric encryption using visuals and diagrams.
 
-## Question 36: Result of computer performing 2 ÷ 3
-<details>
-<summary><strong>View Explanation</strong></summary>
+5. **Practice with Simulated Tests**  
+   - My biggest goal is to build endurance and timing. I plan to take at least two full-length practice tests next trimester to simulate exam conditions.  
+   - After each one, I’ll go through every question I miss and write a one-sentence summary of *why* I missed it. That will help me identify patterns and fix them systematically.
 
-**Question:** What is the result when a computer performs `2 ÷ 3` using integer division?
-
-**Options:**  
-A. 0  
-B. 0.666…  
-C. 2  
-D. 0 (integer division)  
-
-**Your answer:** D  
-**Correct answer:** B  
-
-**Reasoning:** Integer division truncates the decimal, but in the context of AP CSP, this problem uses normal division which yields `0.666…`. Be careful to note whether integer or floating-point division is implied.
-</details>
+Overall, I’m not disappointed in my MCQ performance — I see it as feedback. It showed me exactly where to focus my studying. By reviewing these specific topics and practicing smarter, I know I can raise my understanding and performance significantly before the AP Exam.
 
 ---
 
-## Question 38: Frequent customers of a snack bar
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** Which algorithm correctly identifies frequent customers of a snack bar?
-
-**Options:**  
-A. Count customers with purchases > threshold  
-B. Iterate through purchases and count frequency  
-C. Sort purchases by customer ID  
-D. Use a binary search  
-
-**Your answer:** B  
-**Correct answer:** C  
-
-**Reasoning:** Sorting first makes it easier to group purchases by customer ID, allowing frequency counts to be computed efficiently.
-</details>
-
----
-
-## Question 39: Internet Open Standards and Protocols
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** Which of the following explains a benefit of using open standards and protocols for Internet communication?
-
-**Options:**  
-A. Allow devices from different manufacturers to communicate  
-B. Eliminate Internet message latency  
-C. Allow users to freely share noncommercial material  
-D. Prevent software with errors from being released  
-
-**Your answer:** (blank)  
-**Correct answer:** A  
-
-**Reasoning:** Open standards enable interoperability between devices and platforms built by different developers.
-</details>
-
----
-
-## Question 42: Increasing bit representation for Internet protocol
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** Why would a network increase the bit representation for addresses in an Internet protocol?
-
-**Options:**  
-A. To speed up packet transmission  
-B. To simplify routing  
-C. To allow more unique addresses  
-D. To reduce memory usage  
-
-**Your answer:** C  
-**Correct answer:** D  
-
-**Reasoning:** Increasing the bit length of an address (e.g., IPv4 → IPv6) allows for a larger number of unique IP addresses.
-</details>
-
----
-
-## Question 43: Runtime of algorithm for online retailer
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** Which statement correctly describes the runtime of an algorithm used by an online retailer?
-
-**Options:**  
-A. O(n)  
-B. O(log n)  
-C. O(n²)  
-D. O(1)  
-
-**Your answer:** B  
-**Correct answer:** A  
-
-**Reasoning:** If the algorithm processes each order or customer once, the runtime is linear — O(n).
-</details>
-
----
-
-## Question 45: NAND logic gate
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** What is the output of a NAND gate when both inputs are 1?
-
-**Options:**  
-A. 1  
-B. 0  
-C. Depends on previous input  
-D. 1 if clocked  
-
-**Your answer:** A  
-**Correct answer:** B  
-
-**Reasoning:** NAND outputs 0 only when all inputs are 1; otherwise, output is 1.
-</details>
-
----
-
-## Question 46: Infinite loops and undecidable problems
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** Can we create an algorithm to determine if any program will go into an infinite loop?
-
-**Options:**  
-A. Yes, using low-level languages  
-B. Yes, using multiple CPUs  
-C. Yes, but may not run in reasonable time  
-D. No, it's undecidable  
-
-**Your answer:** (blank)  
-**Correct answer:** D  
-
-**Reasoning:** The Halting Problem is undecidable — there is no algorithm that can determine for every possible program whether it will halt.
-</details>
-
----
-
-## Question 47: Encrypting and decrypting using public key cryptography
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** Which statement best describes public key cryptography?
-
-**Options:**  
-A. Uses the same key to encrypt and decrypt  
-B. Encrypts with a password  
-C. Encrypts messages for offline storage only  
-D. Uses a pair of keys for secure communication  
-
-**Your answer:** B  
-**Correct answer:** D  
-
-**Reasoning:** Public key cryptography relies on two keys — one public for encryption and one private for decryption.
-</details>
-
----
-
-## Question 51: Examples of symmetric encryption
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** Which of the following is an example of symmetric encryption?
-
-**Options:**  
-A. Two codes for a locked box (different actions)  
-B. Mapping letters to symbols using a shared secret key  
-C. Hiding messages under a rock  
-D. Locker message with private combination  
-
-**Your answer:** (blank)  
-**Correct answer:** B  
-
-**Reasoning:** Symmetric encryption uses the same key for both encryption and decryption.
-</details>
-
----
-
-## Question 55: Results of the KeepPlaying procedure
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** What is the result of calling the `KeepPlaying` procedure?
-
-**Options:**  
-A. Ends the game immediately  
-B. Loops until a condition is met  
-C. Throws an error  
-D. Randomly continues  
-
-**Your answer:** A  
-**Correct answer:** D  
-
-**Reasoning:** The loop continues until a condition or random event determines otherwise.
-</details>
-
----
-
-## Question 58: Defining Internet-enabled crowdsourcing
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** What is Internet-enabled crowdsourcing?
-
-**Options:**  
-A. Data stored in one database  
-B. Automating tasks without humans  
-C. Using the Internet to gather input from many people  
-D. A type of encryption  
-
-**Your answer:** (blank)  
-**Correct answer:** C  
-
-**Reasoning:** Crowdsourcing uses contributions from a large group of people online to collect information or ideas.
-</details>
-
----
-
-## Question 60: Managing complexity with abstraction
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** Which is a benefit of using abstraction in programming?
-
-**Options:**  
-A. It speeds up code execution  
-B. Reduces code readability  
-C. Hides implementation details to simplify understanding  
-D. Prevents runtime errors  
-
-**Your answer:** (blank)  
-**Correct answer:** C  
-
-**Reasoning:** Abstraction simplifies understanding and management of complex programs by hiding unnecessary details.
-</details>
-
----
-
-## Question 62: Compare online encyclopedia with paper encyclopedia
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** Which of the following statements is true when comparing online and paper encyclopedias?
-
-**Options:**  
-A. Online always more accurate  
-B. Paper always cheaper  
-C. Online easier to update; paper is fixed  
-D. Online allows hyperlinks and multimedia  
-
-**Your answer:** C & D  
-**Correct answer:** B & D  
-
-**Reasoning:** Online encyclopedias support multimedia and hyperlinks; paper versions have fixed content and can be less expensive.
-</details>
-
----
-
-## Question 63: Use of isPrime procedure
-<details>
-<summary><strong>View Explanation</strong></summary>
-
-**Question:** If `isPrime` returns 1 for numbers 1–10, which numbers are identified as prime?
-
-**Options:**  
-1. 2  
-2. 3  
-3. 4  
-4. 5  
-5. 6  
-6. 7  
-7. 8  
-8. 9  
-9. 10  
-
-**Your answer:** 4  
-**Correct answer:** 4 & 9  
-
-**Reasoning:** The procedure incorrectly classifies 4 and 9 as prime, indicating a logic error in how divisibility is checked.
-</details>
-
----
-
-### ✅ Summary Table
-
-| Question | Your Answer | Correct Answer | Topic |
-|-----------|--------------|----------------|--------|
-| 36 | D | B | Math/Operators |
-| 38 | B | C | Algorithms |
-| 39 | – | A | Internet Protocols |
-| 42 | C | D | Networking |
-| 43 | B | A | Algorithm Efficiency |
-| 45 | A | B | Logic Gates |
-| 46 | – | D | Undecidable Problems |
-| 47 | B | D | Cryptography |
-| 51 | – | B | Encryption |
-| 55 | A | D | Procedure Behavior |
-| 58 | – | C | Crowdsourcing |
-| 60 | – | C | Abstraction |
-| 62 | C&D | B&D | Data Representation |
-| 63 | 4 | 4&9 | Algorithm Logic |
-
-
----
-
-## Question 43: Runtime of algorithm for online retailer
-<d
-
-
-## Something Cool I'd Like to Share
-- During Digital Famine, I implemented shuffling of questions and answers with hints for incorrect attempts, which made the quiz feel interactive and adaptive.  
-- Learned how gamification can improve learning outcomes in computer science education.
+## Future Aspirations in Computer Science
+This class has made me want to keep pushing further into computer science. Next trimester, I want to:
+- Dive deeper into **backend programming** and database management.  
+- Learn more about **algorithms and efficiency**, since those are the foundation of everything else in coding.  
+- Start exploring **AI and data analysis**, since I’m interested in how machine learning can be used in healthcare and education.  
+- Keep improving my **collaboration and GitHub workflow**, since those are the skills that make projects succeed in real-world teams.
+
+My long-term goal is to combine my passion for AI and global health — using technology to solve medical and ethical problems, especially ones involving bias and fairness. This class has given me the technical foundation and the confidence to believe that’s possible.
 
 ---
 
