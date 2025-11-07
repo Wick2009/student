@@ -1,12 +1,11 @@
 ---
 layout: post
-title: "AP CSP Retrospective — 2025"
-description: "Reflecting on the AP Computer Science course, MCQ review, projects, and next steps in computer science learning."
-permalink: /apcsp/retrospective
+toc: True
+breadcrumb: True
+title: AP CSP Retrospective
+description: These Programming topics are focused on Jupyter Notebooks, and Managing Files.
+permalink: /journey/retrospective
 author: Sathwik Kintada
-toc: true
-breadcrumb: true
-date: 2025-11-07
 ---
 
 
