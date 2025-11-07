@@ -3,7 +3,6 @@ layout: post
 toc: True
 breadcrumb: True
 title: AP CSP Retrospective
-description: These Programming topics are focused on Jupyter Notebooks, and Managing Files.
 permalink: /journey/retrospective
 author: Sathwik Kintada
 ---
