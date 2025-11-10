@@ -58,27 +58,22 @@ If I could improve the project, I would add a backend system to store scores and
 
 ---
 
-# AP CSP MCQ Corrections
-
-This table summarizes all the multiple-choice questions I missed on the AP CSP College Board practice test.  
-Each entry includes the question, my answer, the correct answer, and a short reasoning.
-
-| **#** | **Question** | **Your Answer** | **Correct Answer** | **Reasoning** |
-|:---:|:---|:---:|:---:|:---|
-| 36 | What is the result when a computer performs `2 ÷ 3` using integer division? | D | B | I confused integer vs. real division. The question used real division, which yields 0.666… |
-| 38 | Which algorithm correctly identifies frequent customers of a snack bar? | B | C | Sorting by customer ID allows grouping and easier frequency counting. |
-| 39 | Which of the following explains a benefit of using open standards and protocols for Internet communication? | — | A | Open standards enable interoperability between different devices and developers. |
-| 42 | Why would a network increase the bit representation for addresses in an Internet protocol? | C | D | Increasing bits (IPv4 → IPv6) allows more unique addresses to exist. |
-| 43 | Which statement correctly describes the runtime of an algorithm used by an online retailer? | B | A | Processing each item once results in a linear (O(n)) runtime, not logarithmic. |
-| 45 | What is the output of a NAND gate when both inputs are 1? | A | B | A NAND gate only outputs 0 when both inputs are 1. |
-| 46 | Can we create an algorithm to determine if any program will go into an infinite loop? | — | D | The Halting Problem is undecidable — no general algorithm can determine this. |
-| 47 | Which statement best describes public key cryptography? | B | D | Public key cryptography uses two keys — one public, one private — for secure communication. |
-| 51 | Which of the following is an example of symmetric encryption? | — | B | Symmetric encryption uses the same key for both encryption and decryption. |
-| 55 | What is the result of calling the `KeepPlaying` procedure? | A | D | The procedure continues randomly until a condition or event stops it. |
-| 58 | What is Internet-enabled crowdsourcing? | — | C | It’s using the Internet to collect input or ideas from many people online. |
-| 60 | Which is a benefit of using abstraction in programming? | — | C | Abstraction hides details and simplifies complex systems, improving clarity. |
-| 62 | Which statements are true when comparing online and paper encyclopedias? | C & D | B & D | Online supports multimedia and hyperlinks; paper versions are fixed and sometimes cheaper. |
-| 63 | If `isPrime` returns 1 for numbers 1–10, which numbers are identified as prime? | 4 | 4 & 9 | The algorithm incorrectly classifies 4 and 9 as prime — shows logical flaw in divisibility test. |
+| # | Question | Your Answer | Correct Answer | Reasoning |
+|:-:|:--------|:-----------|:--------------|:----------|
+| 36 | What is the result when a computer performs `2 ÷ 3` using integer division? | D) 0 | B) 0.666… | I confused integer vs. real division. The question used real division, which yields 0.666… |
+| 38 | Which algorithm correctly identifies frequent customers of a snack bar? | B) Count occurrences in unsorted list | C) Sort by customer ID and count | Sorting by customer ID allows grouping and easier frequency counting. |
+| 39 | Which of the following explains a benefit of using open standards and protocols for Internet communication? | – | A) Interoperability between devices | Open standards enable interoperability between different devices and developers. |
+| 42 | Why would a network increase the bit representation for addresses in an Internet protocol? | C) Use more bits for encryption | D) Support more unique addresses | Increasing bits (IPv4 → IPv6) allows more unique addresses to exist. |
+| 43 | Which statement correctly describes the runtime of an algorithm used by an online retailer? | B) O(log n) logarithmic | A) O(n) linear | Processing each item once results in linear runtime, not logarithmic. |
+| 45 | What is the output of a NAND gate when both inputs are 1? | A) 1 | B) 0 | A NAND gate only outputs 0 when both inputs are 1. |
+| 46 | Can we create an algorithm to determine if any program will go into an infinite loop? | – | D) No, Halting Problem | The Halting Problem is undecidable — no general algorithm can determine this. |
+| 47 | Which statement best describes public key cryptography? | B) Only private key is needed | D) Uses a public and private key | Public key cryptography uses two keys — one public, one private — for secure communication. |
+| 51 | Which of the following is an example of symmetric encryption? | – | B) AES | Symmetric encryption uses the same key for both encryption and decryption. |
+| 55 | What is the result of calling the `KeepPlaying` procedure? | A) Continues randomly until a condition stops it | D) Continues randomly until a condition stops it | The procedure continues randomly until a condition or event stops it. |
+| 58 | What is Internet-enabled crowdsourcing? | – | C) Using the Internet to collect input or ideas from many people online | It’s using the Internet to collect input or ideas from many people online. |
+| 60 | Which is a benefit of using abstraction in programming? | – | C) Hides details and simplifies complex systems | Abstraction hides details and simplifies complex systems, improving clarity. |
+| 62 | Which statements are true when comparing online and paper encyclopedias? | C) & D) | B) & D) | Online supports multimedia and hyperlinks; paper versions are fixed and sometimes cheaper. |
+| 63 | If `isPrime` returns 1 for numbers 1–10, which numbers are identified as prime? | 4) | 4) & 9) | The algorithm incorrectly classifies 4 and 9 as prime — shows logical flaw in divisibility test. |
 
 ---
 
