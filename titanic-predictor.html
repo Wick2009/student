@@ -64,7 +64,7 @@ permalink: /titanic-predictor
     .hero h1 { font-size: 2rem; }
   }
 
-  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; min-width: 0; overflow: hidden; }
   .form-group.full-width { grid-column: 1 / -1; }
 
   label {
@@ -161,6 +161,8 @@ permalink: /titanic-predictor
     background: rgba(125,211,252,0.15);
     cursor: pointer;
     width: 100%;
+    max-width: 100%;
+    display: block;
   }
 
   input[type="range"]::-webkit-slider-thumb {
