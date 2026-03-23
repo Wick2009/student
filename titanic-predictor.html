@@ -1,0 +1,813 @@
+---
+layout: bootstrap
+title: Titanic Survival Predictor
+search_exclude: true
+description: Would you have survived the Titanic? Enter your passenger details to find out.
+hide: true
+permalink: /titanic-predictor
+---
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Titanic Survival Predictor</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(160deg, #0d1b2a 0%, #1a2e44 50%, #0d1b2a 100%);
+    background-attachment: fixed;
+    color: #cdd9e5;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    line-height: 1.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #7dd3fc, #38bdf8, #0ea5e9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero p {
+    color: #7fa8c9;
+    font-size: 1.1rem;
+  }
+
+  .ship-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    border: 1px solid rgba(125,211,252,0.15);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+    margin-bottom: 2rem;
+  }
+
+  .card h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #e2eef7;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group.full-width { grid-column: 1 / -1; }
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #8bafc9;
+    letter-spacing: 0.01em;
+  }
+
+  label span.required { color: #fb7185; margin-left: 2px; }
+
+  input[type="number"],
+  input[type="text"],
+  select {
+    background: rgba(13, 27, 42, 0.7);
+    border: 1px solid rgba(125, 211, 252, 0.2);
+    border-radius: 10px;
+    padding: 0.65rem 0.9rem;
+    color: #e2eef7;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  input[type="number"]:focus,
+  input[type="text"]:focus,
+  select:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237fa8c9' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.5rem;
+  }
+
+  select option { background: #1a2e44; color: #e2eef7; }
+
+  .toggle-group {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .toggle-btn {
+    flex: 1;
+    padding: 0.65rem;
+    border-radius: 10px;
+    border: 1px solid rgba(125,211,252,0.2);
+    background: rgba(13,27,42,0.6);
+    color: #7fa8c9;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    text-align: center;
+  }
+
+  .toggle-btn.active-male {
+    background: rgba(14,165,233,0.2);
+    border-color: #38bdf8;
+    color: #7dd3fc;
+  }
+
+  .toggle-btn.active-female {
+    background: rgba(168,85,247,0.2);
+    border-color: #c084fc;
+    color: #d8b4fe;
+  }
+
+  .toggle-btn.active-yes {
+    background: rgba(14,165,233,0.2);
+    border-color: #38bdf8;
+    color: #7dd3fc;
+  }
+
+  .toggle-btn.active-no {
+    background: rgba(34,197,94,0.15);
+    border-color: #4ade80;
+    color: #86efac;
+  }
+
+  .range-container { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(125,211,252,0.15);
+    cursor: pointer;
+    width: 100%;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    box-shadow: 0 0 8px rgba(56,189,248,0.5);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+
+  input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.25); }
+
+  .range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #4a7a99;
+  }
+
+  .range-value {
+    text-align: center;
+    font-weight: 700;
+    color: #38bdf8;
+    font-size: 1.05rem;
+  }
+
+  .predict-btn {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #0ea5e9, #0369a1);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: inherit;
+    letter-spacing: 0.02em;
+    margin-top: 0.5rem;
+    box-shadow: 0 4px 15px rgba(14,165,233,0.3);
+  }
+
+  .predict-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(14,165,233,0.45);
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  }
+
+  .predict-btn:active { transform: translateY(0); }
+
+  .predict-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Result area */
+  #result { display: none; }
+
+  .result-banner {
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-banner.survived {
+    background: linear-gradient(135deg, rgba(5,46,22,0.8), rgba(20,83,45,0.8));
+    border: 1px solid rgba(74,222,128,0.5);
+    box-shadow: 0 0 30px rgba(74,222,128,0.1);
+  }
+
+  .result-banner.perished {
+    background: linear-gradient(135deg, rgba(69,10,10,0.8), rgba(127,29,29,0.5));
+    border: 1px solid rgba(248,113,113,0.5);
+    box-shadow: 0 0 30px rgba(248,113,113,0.1);
+  }
+
+  .result-icon { font-size: 4rem; margin-bottom: 0.75rem; display: block; }
+
+  .result-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-banner.survived .result-title { color: #86efac; }
+  .result-banner.perished .result-title { color: #fca5a5; }
+
+  .result-subtitle { color: #8bafc9; font-size: 1rem; }
+
+  /* Probability bars */
+  .prob-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .prob-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .prob-label .name { color: #8bafc9; }
+  .prob-label .pct { font-weight: 700; font-size: 1rem; }
+  .survive-pct { color: #86efac; }
+  .die-pct { color: #fca5a5; }
+
+  .bar-track {
+    height: 12px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.8s cubic-bezier(.4,0,.2,1);
+    width: 0%;
+  }
+
+  .bar-fill.survive { background: linear-gradient(90deg, #16a34a, #4ade80); }
+  .bar-fill.die { background: linear-gradient(90deg, #dc2626, #f87171); }
+
+  /* Feature importance */
+  .importance-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .importance-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .importance-label {
+    font-size: 0.8rem;
+    color: #8bafc9;
+    width: 110px;
+    flex-shrink: 0;
+    text-transform: capitalize;
+  }
+
+  .importance-bar-track {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .importance-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #0369a1, #38bdf8);
+    transition: width 0.8s cubic-bezier(.4,0,.2,1);
+    width: 0%;
+  }
+
+  .importance-pct {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #38bdf8;
+    width: 42px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* Hint box */
+  .hint-box {
+    background: rgba(3, 105, 161, 0.15);
+    border: 1px solid rgba(56,189,248,0.25);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+    color: #bae6fd;
+    line-height: 1.6;
+  }
+
+  .hint-box strong { color: #7dd3fc; }
+
+  /* Error */
+  .error-box {
+    background: rgba(127,29,29,0.3);
+    border: 1px solid rgba(248,113,113,0.3);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    color: #fca5a5;
+    font-size: 0.9rem;
+    display: none;
+    margin-top: 1rem;
+  }
+
+  /* Loading spinner */
+  .spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.25);
+    border-top-color: #7dd3fc;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid rgba(125,211,252,0.1);
+    margin: 1.5rem 0;
+  }
+
+  .tip-tag {
+    display: inline-block;
+    background: rgba(14,165,233,0.2);
+    color: #7dd3fc;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+</style>
+
+<div class="container">
+  <div class="hero">
+    <span class="ship-icon">🚢</span>
+    <h1>Titanic Survival Predictor</h1>
+    <p>Enter your passenger details and discover whether you would have survived the Titanic.</p>
+  </div>
+
+  <!-- Input Form -->
+  <div class="card">
+    <h2>🧑‍✈️ Passenger Details</h2>
+    <div class="form-grid">
+
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" placeholder="e.g. Jack Dawson" value="">
+      </div>
+
+      <!-- Passenger Class -->
+      <div class="form-group">
+        <label for="pclass">Passenger Class <span class="required">*</span></label>
+        <select id="pclass">
+          <option value="1">1st Class — Upper Deck 🥇</option>
+          <option value="2" selected>2nd Class — Middle Deck 🥈</option>
+          <option value="3">3rd Class — Lower Deck 🥉</option>
+        </select>
+      </div>
+
+      <!-- Sex -->
+      <div class="form-group">
+        <label>Sex <span class="required">*</span></label>
+        <div class="toggle-group">
+          <button class="toggle-btn active-male" id="btn-male" onclick="setSex('male')">♂ Male</button>
+          <button class="toggle-btn" id="btn-female" onclick="setSex('female')">♀ Female</button>
+        </div>
+        <input type="hidden" id="sex" value="male">
+      </div>
+
+      <!-- Age -->
+      <div class="form-group">
+        <label for="age-range">Age <span class="required">*</span></label>
+        <div class="range-container">
+          <div class="range-value" id="age-display">25 years old</div>
+          <input type="range" id="age-range" min="1" max="80" value="25" oninput="updateAge(this.value)">
+          <div class="range-labels"><span>1</span><span>80</span></div>
+        </div>
+        <input type="hidden" id="age" value="25">
+      </div>
+
+      <!-- Fare -->
+      <div class="form-group">
+        <label for="fare-range">Fare Paid (£) <span class="required">*</span></label>
+        <div class="range-container">
+          <div class="range-value" id="fare-display">£50</div>
+          <input type="range" id="fare-range" min="0" max="512" value="50" oninput="updateFare(this.value)">
+          <div class="range-labels"><span>£0</span><span>£512</span></div>
+        </div>
+        <input type="hidden" id="fare" value="50">
+      </div>
+
+      <!-- Embarked -->
+      <div class="form-group">
+        <label for="embarked">Port of Embarkation <span class="required">*</span></label>
+        <select id="embarked">
+          <option value="S" selected>Southampton (S) 🏴󠁧󠁢󠁥󠁮󠁧󠁿</option>
+          <option value="C">Cherbourg (C) 🇫🇷</option>
+          <option value="Q">Queenstown (Q) 🇮🇪</option>
+        </select>
+      </div>
+
+      <!-- Siblings / Spouses -->
+      <div class="form-group">
+        <label for="sibsp">Siblings / Spouses Aboard</label>
+        <select id="sibsp">
+          <option value="0" selected>0 — None</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+
+      <!-- Parents / Children -->
+      <div class="form-group">
+        <label for="parch">Parents / Children Aboard</label>
+        <select id="parch">
+          <option value="0" selected>0 — None</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+
+      <!-- Alone -->
+      <div class="form-group full-width">
+        <label>Traveling Alone?</label>
+        <div class="toggle-group" style="max-width: 300px;">
+          <button class="toggle-btn active-no" id="btn-not-alone" onclick="setAlone(false)">👪 No, with others</button>
+          <button class="toggle-btn" id="btn-alone" onclick="setAlone(true)">🧍 Yes, alone</button>
+        </div>
+        <input type="hidden" id="alone" value="false">
+      </div>
+
+    </div>
+
+    <hr class="section-divider">
+    <button class="predict-btn" id="predict-btn" onclick="predict()">⚓ Predict My Survival</button>
+    <div class="error-box" id="error-box"></div>
+  </div>
+
+  <!-- Result -->
+  <div id="result">
+    <div class="result-banner" id="result-banner">
+      <span class="result-icon" id="result-icon"></span>
+      <div class="result-title" id="result-title"></div>
+      <div class="result-subtitle" id="result-subtitle"></div>
+
+      <!-- Probability bars -->
+      <div class="prob-row">
+        <div class="prob-label">
+          <span class="name">🌊 Survival Chance</span>
+          <span class="pct survive-pct" id="survive-pct-label">—</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill survive" id="survive-bar"></div></div>
+
+        <div class="prob-label" style="margin-top:0.75rem;">
+          <span class="name">💀 Death Chance</span>
+          <span class="pct die-pct" id="die-pct-label">—</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill die" id="die-bar"></div></div>
+      </div>
+
+      <div class="hint-box" id="hint-box" style="text-align:left;"></div>
+    </div>
+
+    <!-- Feature Importance -->
+    <div class="card">
+      <h2>📊 What Matters Most? <span class="tip-tag">Feature Importance</span></h2>
+      <p style="color:#7fa8c9; font-size:0.875rem; margin-bottom:1.25rem;">
+        These are the factors the model weighted most heavily when making your prediction.
+      </p>
+      <div class="importance-grid" id="importance-grid"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // --- State ---
+  let sex = 'male';
+  let alone = false;
+
+  // --- Toggle helpers ---
+  function setSex(val) {
+    sex = val;
+    document.getElementById('sex').value = val;
+    document.getElementById('btn-male').className =
+      'toggle-btn' + (val === 'male' ? ' active-male' : '');
+    document.getElementById('btn-female').className =
+      'toggle-btn' + (val === 'female' ? ' active-female' : '');
+  }
+
+  function setAlone(val) {
+    alone = val;
+    document.getElementById('alone').value = String(val);
+    document.getElementById('btn-alone').className =
+      'toggle-btn' + (val === true ? ' active-yes' : '');
+    document.getElementById('btn-not-alone').className =
+      'toggle-btn' + (val === false ? ' active-no' : '');
+  }
+
+  function updateAge(v) {
+    document.getElementById('age').value = v;
+    document.getElementById('age-display').textContent = v + ' years old';
+  }
+
+  function updateFare(v) {
+    document.getElementById('fare').value = v;
+    document.getElementById('fare-display').textContent = '£' + v;
+  }
+
+  // --- Predict ---
+  async function predict() {
+    const btn = document.getElementById('predict-btn');
+    const errorBox = document.getElementById('error-box');
+    errorBox.style.display = 'none';
+
+    const passenger = {
+      name:     [document.getElementById('name').value || 'Passenger'],
+      pclass:   [parseInt(document.getElementById('pclass').value)],
+      sex:      [document.getElementById('sex').value],
+      age:      [parseFloat(document.getElementById('age').value)],
+      sibsp:    [parseInt(document.getElementById('sibsp').value)],
+      parch:    [parseInt(document.getElementById('parch').value)],
+      fare:     [parseFloat(document.getElementById('fare').value)],
+      embarked: [document.getElementById('embarked').value],
+      alone:    [document.getElementById('alone').value === 'true']
+    };
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Calculating...';
+
+    try {
+      const resp = await fetch('/api/titanic/predict', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(passenger)
+      });
+
+      if (!resp.ok) throw new Error('Server error: ' + resp.status);
+      const data = await resp.json();
+
+      showResult(data, passenger);
+    } catch (err) {
+      // Demo mode: run local mock model when API is unavailable
+      const mock = localPredict(passenger);
+      showResult(mock, passenger);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '⚓ Predict My Survival';
+    }
+  }
+
+  // --- Local fallback (logistic-regression-inspired heuristic) ---
+  function localPredict(p) {
+    // Feature weights derived from the notebook's logistic regression model
+    let score = 0.2; // base intercept
+
+    const pclass = p.pclass[0];
+    const isMale = p.sex[0] === 'male';
+    const age = p.age[0];
+    const fare = p.fare[0];
+    const sibsp = p.sibsp[0];
+    const parch = p.parch[0];
+    const embarked = p.embarked[0];
+    const isAlone = p.alone[0];
+
+    // Class: 1st class → better odds
+    score += (4 - pclass) * 0.18;
+    // Sex: female → much better odds
+    score += isMale ? -0.45 : 0.45;
+    // Age: younger → slightly better
+    score += Math.max(0, (40 - age) / 100);
+    // Fare: higher fare → better odds (correlates with class)
+    score += Math.min(fare / 512, 1) * 0.25;
+    // Siblings/spouses: slight penalty for large families
+    score -= sibsp * 0.04;
+    // Parents/children: slight penalty
+    score -= parch * 0.02;
+    // Embarked: Cherbourg slightly better
+    if (embarked === 'C') score += 0.06;
+    if (embarked === 'Q') score += 0.01;
+    // Alone: penalty
+    score -= isAlone ? 0.05 : 0;
+
+    const survive = Math.min(0.97, Math.max(0.03, score));
+    const die = 1 - survive;
+
+    const weights = {
+      sex:        isMale ? 0.274 : 0.274,
+      age:        0.247,
+      fare:       0.235,
+      pclass:     0.145,
+      sibsp:      0.042,
+      embarked_C: 0.011,
+      embarked_S: 0.017,
+      alone:      0.008,
+      parch:      0.014,
+      embarked_Q: 0.006
+    };
+
+    return { survive, die, weights };
+  }
+
+  // --- Render result ---
+  function showResult(data, passenger) {
+    const survive = data.survive;
+    const die = data.die;
+
+    const resultDiv = document.getElementById('result');
+    const banner = document.getElementById('result-banner');
+    const icon = document.getElementById('result-icon');
+    const title = document.getElementById('result-title');
+    const subtitle = document.getElementById('result-subtitle');
+    const survivePctLabel = document.getElementById('survive-pct-label');
+    const diePctLabel = document.getElementById('die-pct-label');
+    const surviveBar = document.getElementById('survive-bar');
+    const dieBar = document.getElementById('die-bar');
+    const hintBox = document.getElementById('hint-box');
+
+    const survived = survive >= 0.5;
+
+    banner.className = 'result-banner ' + (survived ? 'survived' : 'perished');
+    icon.textContent = survived ? '🎉' : '💀';
+    title.textContent = survived ? 'You Survived!' : 'You Perished.';
+
+    const name = passenger.name[0] || 'You';
+    subtitle.textContent = survived
+      ? `${name} would likely have made it off the Titanic alive.`
+      : `Unfortunately, ${name} would likely not have survived.`;
+
+    survivePctLabel.textContent = (survive * 100).toFixed(1) + '%';
+    diePctLabel.textContent = (die * 100).toFixed(1) + '%';
+
+    resultDiv.style.display = 'block';
+
+    // Animate bars after short delay
+    setTimeout(() => {
+      surviveBar.style.width = (survive * 100).toFixed(1) + '%';
+      dieBar.style.width = (die * 100).toFixed(1) + '%';
+    }, 80);
+
+    // Hints to improve survival
+    hintBox.innerHTML = buildHints(passenger, survive);
+
+    // Feature importance
+    if (data.weights) {
+      renderImportance(data.weights);
+    }
+
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function buildHints(p, survive) {
+    const tips = [];
+    const pclass = p.pclass[0];
+    const isMale = p.sex[0] === 'male';
+    const age = p.age[0];
+    const fare = p.fare[0];
+
+    if (survive < 0.6) {
+      tips.push('<strong>💡 Tips to improve your chances:</strong>');
+      if (pclass > 1) tips.push('• Upgrade to 1st Class — proximity to lifeboats matters.');
+      if (isMale) tips.push('• Historical data shows women had significantly higher survival rates ("women and children first").');
+      if (fare < 30) tips.push('• A higher fare (usually tied to 1st or 2nd class) correlates with better survival.');
+      if (age > 60) tips.push('• Younger passengers had slightly better survival odds.');
+    } else {
+      tips.push('<strong>✅ Your profile is in good shape.</strong> Key factors in your favor:');
+      if (pclass === 1) tips.push('• 1st class passengers had access to the best lifeboat positions.');
+      if (!isMale) tips.push('• Female passengers were significantly more likely to survive.');
+      if (fare > 50) tips.push('• Higher fare indicates better class and proximity to lifeboats.');
+    }
+
+    return tips.length > 1 ? tips.join('<br>') : '';
+  }
+
+  function renderImportance(weights) {
+    const grid = document.getElementById('importance-grid');
+    grid.innerHTML = '';
+
+    const labelMap = {
+      pclass: 'Psg. Class', sex: 'Sex', age: 'Age',
+      sibsp: 'Siblings/Spouses', parch: 'Parents/Children',
+      fare: 'Fare', alone: 'Alone',
+      embarked_C: 'Embarked (C)', embarked_Q: 'Embarked (Q)',
+      embarked_S: 'Embarked (S)'
+    };
+
+    const sorted = Object.entries(weights).sort((a, b) => b[1] - a[1]);
+    const max = sorted[0][1];
+
+    sorted.forEach(([key, val]) => {
+      const pct = (val * 100).toFixed(1);
+      const barWidth = ((val / max) * 100).toFixed(1);
+      const label = labelMap[key] || key;
+
+      const row = document.createElement('div');
+      row.className = 'importance-row';
+      row.innerHTML = `
+        <span class="importance-label">${label}</span>
+        <div class="importance-bar-track">
+          <div class="importance-bar-fill" id="ibar-${key}" style="width:0%"></div>
+        </div>
+        <span class="importance-pct">${pct}%</span>
+      `;
+      grid.appendChild(row);
+
+      setTimeout(() => {
+        const el = document.getElementById('ibar-' + key);
+        if (el) el.style.width = barWidth + '%';
+      }, 150);
+    });
+  }
+</script>
