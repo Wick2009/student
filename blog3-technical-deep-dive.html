@@ -1,0 +1,388 @@
+---
+layout: base
+title: Building a Domain-Scoped AI and a CSS-Powered Accessibility System
+permalink: /blog/uesl-technical/
+description: Inside the Groq API backend and the CSS custom property architecture that powers the UESL accessibility toolkit.
+hide: true
+search_exclude: true
+---
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
+
+  /* ── Page-wide theme override ── */
+  body {
+    background-color: #0b0c14 !important;
+  }
+
+  .page-content {
+    background:
+      radial-gradient(ellipse 65% 40% at 95% 5%,  rgba(34,211,238,0.055) 0%, transparent 100%),
+      radial-gradient(ellipse 55% 55% at 5%  95%,  rgba(167,139,250,0.045) 0%, transparent 100%),
+      repeating-linear-gradient(0deg,   transparent, transparent 27px, rgba(255,255,255,0.012) 27px, rgba(255,255,255,0.012) 28px),
+      repeating-linear-gradient(90deg,  transparent, transparent 27px, rgba(255,255,255,0.012) 27px, rgba(255,255,255,0.012) 28px);
+  }
+
+  /* ── Hero ── */
+  .sk-hero {
+    margin: -30px -30px 0;
+    padding: 80px 30px 64px;
+    background: linear-gradient(135deg, #0d0e18 0%, #0f1428 35%, #10152e 60%, #0d0e18 100%);
+    background-size: 300% 300%;
+    animation: skHeroShift 12s ease infinite;
+    border-bottom: 1px solid rgba(34,211,238,0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sk-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #22d3ee 38%, #a78bfa 62%, transparent 100%);
+    opacity: 0.65;
+  }
+
+  .sk-hero::after {
+    content: '';
+    position: absolute;
+    top: -90px; right: -70px;
+    width: 420px; height: 420px;
+    background: radial-gradient(circle, rgba(34,211,238,0.09) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .sk-hero-glow2 {
+    position: absolute;
+    bottom: -70px; left: -50px;
+    width: 340px; height: 340px;
+    background: radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  @keyframes skHeroShift {
+    0%,100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+
+  @keyframes skAccentPulse {
+    0%,100% { opacity: 0.75; box-shadow: 0 0 8px  rgba(34,211,238,0.35); }
+    50%      { opacity: 1;    box-shadow: 0 0 20px rgba(34,211,238,0.6); }
+  }
+
+  .sk-hero-inner {
+    max-width: 680px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Tags ── */
+  .sk-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+
+  .sk-tag {
+    font-size: 0.67rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 11px;
+    border-radius: 999px;
+    background: rgba(34,211,238,0.1);
+    color: #22d3ee;
+    border: 1px solid rgba(34,211,238,0.22);
+  }
+
+  .sk-tag-purple {
+    background: rgba(167,139,250,0.1);
+    color: #a78bfa;
+    border-color: rgba(167,139,250,0.22);
+  }
+
+  .sk-tag-neutral {
+    background: rgba(148,163,184,0.07);
+    color: #94a3b8;
+    border-color: rgba(148,163,184,0.16);
+  }
+
+  /* ── Hero text ── */
+  .sk-hero h1 {
+    font-family: 'Space Grotesk', -apple-system, sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.55rem);
+    font-weight: 700;
+    line-height: 1.11;
+    letter-spacing: -0.024em;
+    color: #edf2f7;
+    margin-bottom: 0;
+  }
+
+  .sk-accent-line {
+    width: 46px;
+    height: 3px;
+    background: linear-gradient(90deg, #22d3ee, #a78bfa);
+    border-radius: 2px;
+    margin: 18px 0 20px;
+    animation: skAccentPulse 3s ease-in-out infinite;
+  }
+
+  .sk-hero-sub {
+    font-size: 1rem;
+    color: #8b99ae;
+    line-height: 1.65;
+    margin-bottom: 24px;
+    max-width: 540px;
+  }
+
+  .sk-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: #4e5c70;
+  }
+
+  .sk-meta-dot { color: #252636; }
+
+  /* ── Cross-post nav ── */
+  .sk-postnav-wrap {
+    margin: 28px 0 0;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .sk-postnav-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #3d4a58;
+    padding: 0 8px 0 4px;
+    white-space: nowrap;
+  }
+
+  .sk-postnav-wrap a {
+    font-size: 0.79rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 6px 13px 6px 10px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    color: #6b7d90;
+    background: transparent;
+    transition: all 0.16s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .sk-postnav-wrap a::before {
+    content: '';
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.3;
+    flex-shrink: 0;
+  }
+
+  .sk-postnav-wrap a:hover {
+    color: #c0ccd8;
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.09);
+  }
+
+  .sk-postnav-wrap a.sk-current {
+    color: #22d3ee;
+    background: rgba(34,211,238,0.1);
+    border-color: rgba(34,211,238,0.2);
+  }
+
+  .sk-postnav-wrap a.sk-current::before {
+    background: #22d3ee;
+    opacity: 1;
+    box-shadow: 0 0 5px rgba(34,211,238,0.8);
+  }
+
+  /* ── Article section ── */
+  .sk-article-wrap {
+    padding: 52px 0 80px;
+    position: relative;
+  }
+
+  .sk-article-wrap::before {
+    content: '';
+    position: absolute;
+    left: -18px;
+    top: 80px;
+    bottom: 80px;
+    width: 2px;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(34,211,238,0.32) 28%,
+      rgba(167,139,250,0.22) 72%,
+      transparent 100%);
+    border-radius: 1px;
+  }
+
+  .sk-body {
+    max-width: 680px;
+  }
+
+  .sk-body p {
+    font-size: 1.04rem;
+    line-height: 1.88;
+    color: #b4c0ce;
+    margin-bottom: 1.6em;
+  }
+
+  .sk-body p:last-of-type { margin-bottom: 0; }
+
+  .sk-body code, code {
+    font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
+    font-size: 0.875em;
+    background: #11121e;
+    color: #22d3ee;
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid #1e2040;
+    white-space: nowrap;
+    box-shadow: 0 0 10px rgba(34,211,238,0.1), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  /* ── Article end ornament ── */
+  .sk-article-end {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 56px;
+  }
+
+  .sk-end-line { flex: 1; height: 1px; }
+  .sk-end-line:first-child { background: linear-gradient(to right, transparent, rgba(34,211,238,0.2)); }
+  .sk-end-line:last-child  { background: linear-gradient(to left,  transparent, rgba(167,139,250,0.2)); }
+
+  .sk-end-dot {
+    width: 6px; height: 6px;
+    background: linear-gradient(135deg, #22d3ee, #a78bfa);
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 10px rgba(34,211,238,0.5);
+  }
+
+  /* ── Back to top ── */
+  .sk-btt {
+    position: fixed;
+    bottom: 32px; right: 32px;
+    width: 44px; height: 44px;
+    background: #11121e;
+    border: 1px solid #252840;
+    border-radius: 50%;
+    color: #22d3ee;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.18s, visibility 0.18s, transform 0.18s, box-shadow 0.18s, background 0.18s;
+    z-index: 999;
+  }
+
+  .sk-btt.sk-visible { opacity: 1; visibility: visible; transform: translateY(0); }
+
+  .sk-btt:hover {
+    background: rgba(34,211,238,0.12);
+    border-color: rgba(34,211,238,0.4);
+    box-shadow: 0 0 18px rgba(34,211,238,0.22);
+  }
+
+  @media (max-width: 600px) {
+    .sk-hero { margin: -30px -18px 0; padding: 52px 18px 44px; }
+    .sk-article-wrap::before { display: none; }
+    .sk-btt { bottom: 20px; right: 20px; }
+    .sk-postnav-label { display: none; }
+  }
+</style>
+
+<section class="sk-hero">
+  <div class="sk-hero-glow2" aria-hidden="true"></div>
+  <div class="sk-hero-inner">
+    <div class="sk-tags">
+      <span class="sk-tag sk-tag-neutral">Full Stack</span>
+      <span class="sk-tag sk-tag-purple">AI/ML</span>
+      <span class="sk-tag">Technical</span>
+    </div>
+    <h1>Building a Domain-Scoped AI and a CSS-Powered Accessibility System</h1>
+    <div class="sk-accent-line" aria-hidden="true"></div>
+    <p class="sk-hero-sub">Inside the Groq API backend and the CSS custom property architecture that powers the toolkit.</p>
+    <div class="sk-meta">
+      <time datetime="2026-05-26">May 26, 2026</time>
+      <span class="sk-meta-dot" aria-hidden="true">·</span>
+      <span>7 min read</span>
+    </div>
+    <nav class="sk-postnav-wrap" aria-label="Blog posts">
+      <span class="sk-postnav-label">Posts</span>
+      <a href="{{ site.baseurl }}/blog/uesl-personal/">Personal Experience</a>
+      <a href="{{ site.baseurl }}/blog/uesl-highlights/">Project Highlights</a>
+      <a href="{{ site.baseurl }}/blog/uesl-technical/" class="sk-current" aria-current="page">Technical Deep Dive</a>
+    </nav>
+  </div>
+</section>
+
+<div class="sk-article-wrap">
+  <article class="sk-body">
+
+    <p>Two technical systems define most of my work on this project. The first is the Groq backend that powers the UESL Coach chatbot and page summarizer. The second is the CSS architecture that makes the toolkit work across every component of the site without touching any of them individually. Both involve decisions that are easy to get wrong in ways that do not surface until something breaks at scale.</p>
+
+    <p>Starting with the backend. I built six API endpoints in <code>groq_api.py</code> on a Flask Blueprint with the <code>/api</code> prefix. The simpler ones are <code>/api/groq</code> (a basic chat passthrough), <code>/api/groq/chat</code> (an enhanced version that returns usage metadata), <code>/api/groq/models</code> (a list of available models with descriptions), and <code>/api/groq/health</code> (a health check). The more interesting ones are <code>/api/groq/analyze</code> and <code>/api/uesl-chat</code>.</p>
+
+    <p>The <code>/api/groq/analyze</code> endpoint handles text analysis tasks. When the task is summarization, it runs with <code>temperature 0.3</code> and a system prompt focused on factual accuracy: <code>"You are a text analysis expert. Respond clearly and concisely."</code> <code>Temperature 0.3</code> keeps the model close to the most probable output — less creativity, more reliability. That is the right setting for a tool that needs to distill content accurately rather than riff on it.</p>
+
+    <p>The <code>/api/uesl-chat</code> endpoint is built differently. It uses <code>temperature 0.7</code> for warmer, more varied responses, and it has a hardcoded system prompt that is not configurable at runtime. The prompt gives the model a specific identity: UESL Coach, a friendly assistant that only answers questions about the Unified Esports League. The knowledge baked into the prompt covers the program's mission, the 1:3 coach-to-client ratio, the age range (8 and up), the cost structure (free for San Diego Regional Center clients), the seven tech center locations, and Spanish-language contact information. The prompt ends with a hard behavioral instruction: keep answers to two to four sentences and stay encouraging.</p>
+
+    <p>Hardcoding the system prompt was a deliberate choice. The UESL Coach is not meant to be a general chatbot — it is meant to be a predictable, trustworthy assistant for an audience that benefits from consistency. Making the prompt configurable at runtime would open the door to the model drifting outside its intended scope, which is exactly the failure mode this design is trying to prevent.</p>
+
+    <p>Context management in the chatbot uses a sliding window. Each <code>POST</code> request to <code>/api/uesl-chat</code> sends the last ten messages from the conversation history along with the system prompt. On the frontend, the Summarize Page input is truncated at <code>1800</code> characters before being sent. These two constraints together keep the token budget predictable across long sessions without breaking conversational coherence.</p>
+
+    <p>The CSS architecture works on a similar principle of constraining scope to get broad effects. The high-contrast and dyslexia font toggles in the toolkit do not write any per-component CSS. Instead, they add a class to the <code>html</code> element — <code>tk-high-contrast</code> or <code>tk-dyslexia</code> — and the corresponding CSS redefines a set of custom properties at the root level.</p>
+
+    <p>High contrast remaps eight variables at once: <code>--bg</code> becomes <code>#000</code>, <code>--surface</code> becomes <code>#0d0d0d</code>, <code>--text</code> becomes <code>#fff</code>, <code>--cyan</code> becomes <code>#ff0</code>, and the remaining surface and border variables follow. Because every component in the UESL site uses these design tokens rather than hardcoded color values, the entire site switches to high-contrast without a single per-component rule. If the site has fifty components, you do not write fifty overrides. You write eight variable definitions and the CSS cascade handles the rest automatically.</p>
+
+    <p>The dyslexia font works the same way. The <code>@font-face</code> declaration for OpenDyslexic is injected into the document only when the toggle is first enabled, not on page load, which avoids an unnecessary CDN request for users who never use the feature. The CSS then applies to every text element: <code>font-family</code>, <code>letter-spacing</code> at <code>0.04em</code>, <code>word-spacing</code> at <code>0.1em</code>, <code>line-height</code> at <code>1.7</code>. Comic Sans is the declared fallback if the CDN fails — not a visual ideal, but it preserves the wider spacing properties that matter most for readability.</p>
+
+    <p>Both systems share the same underlying principle: define the constraint at the right level of abstraction, and let everything below it respond automatically. For the AI, that level is the system prompt. For the CSS, it is the root custom properties. Getting that layer right means the system scales without accumulating technical debt every time something new is added to the site.</p>
+
+    <div class="sk-article-end" aria-hidden="true">
+      <div class="sk-end-line"></div>
+      <div class="sk-end-dot"></div>
+      <div class="sk-end-line"></div>
+    </div>
+
+  </article>
+</div>
+
+<button class="sk-btt" id="skBtt" aria-label="Back to top">&#8593;</button>
+
+<script>
+  (function () {
+    var btn = document.getElementById('skBtt');
+    window.addEventListener('scroll', function () {
+      btn.classList.toggle('sk-visible', window.scrollY > 300);
+    }, { passive: true });
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
